@@ -7,10 +7,44 @@ function Gameboard() {
     const getBoard = () => board;
     return getBoard();
 }
-const board = Gameboard();
 
 
-function TicTacToe() {
+function gameController() {
     const board = Gameboard();
+    let player1 = 'x';
+    let player2 = 'o';
+    let turn = player1;
+
+    function turnCheck() {
+        
+        if (turn === player1) {
+            turn = player2;
+
+        } else {
+            turn = player1;
+
+        }
+        return turn
+
+    }
+    
+    return turnCheck;
 
 }
+
+function display() {
+    const game = gameController();
+    const squares = document.querySelectorAll('.square');
+
+    squares.forEach(square => {
+        square.addEventListener ('click', () =>{
+            console.log(game)
+        square.textContent = game();
+        
+        
+        })
+    })
+
+}
+
+display();
