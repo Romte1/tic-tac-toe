@@ -35,10 +35,19 @@ function gameController() {
 function display() {
     const game = gameController();
     const squares = document.querySelectorAll('.square');
+    const modal = document.querySelector('.modal');
+    const btnRestart = document.querySelector('.btnRestart');
+    modal.showModal();
+
+    btnRestart.addEventListener('click', () => {
+        modal.close();
+    })
 
     squares.forEach(square => {
         square.addEventListener ('click', () =>{
-            console.log(game)
+        if (square.textContent !== '') {
+            return
+        }
         square.textContent = game();
         
         

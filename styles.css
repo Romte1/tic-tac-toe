@@ -84,7 +84,7 @@ body {
     user-select: none;
 
     .header {
-        font-size: 4rem;
+        font-size: min(4rem, 8vw);
     }
     
 
@@ -95,8 +95,8 @@ body {
 
         .square {
             display: flex;
-            width: 200px;
-            height: 200px;
+            width: 160px;
+            height: 160px;
             justify-content: center;
             align-items: center;
             font-size: 10rem;
@@ -117,5 +117,28 @@ body {
                 border-left:var(--square-borders);
             }
         }
+    }
+}
+
+dialog {
+    padding:32px;
+    gap:16px;
+    font-size: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    &::backdrop {
+        backdrop-filter: blur(4px);
+    }
+
+    >button {
+        height: 100px;
+        width: 250px;
+    }
+
+    >div {
+        
     }
 }
