@@ -14,6 +14,7 @@ function gameController() {
     let player1 = 'x';
     let player2 = 'o';
     let turn = player1;
+    let actions = 0;
 
     function turnCheck() {
         
@@ -27,8 +28,18 @@ function gameController() {
         return turn
 
     }
+
+    function actionsCounter() {
+        actions++
+        return actions
+
+    }
+
+    function resetActions() {
+        return actions = 0;
+    }
     
-    return turnCheck;
+    return {turnCheck, actionsCounter, resetActions};
 
 }
 
@@ -37,10 +48,13 @@ function display() {
     const squares = document.querySelectorAll('.square');
     const modal = document.querySelector('.modal');
     const btnRestart = document.querySelector('.btnRestart');
-    modal.showModal();
 
     btnRestart.addEventListener('click', () => {
         modal.close();
+        squares.forEach(square => {
+            square.textContent = '';
+        })
+        game.resetActions();
     })
 
     squares.forEach(square => {
@@ -48,7 +62,13 @@ function display() {
         if (square.textContent !== '') {
             return
         }
-        square.textContent = game();
+        square.textContent = game.turnCheck();
+        let counter = game.actionsCounter();
+        console.log(counter);
+        if (counter === 9) {
+            modal.showModal();
+        }
+
         
         
         })
