@@ -56,8 +56,8 @@ function gameController() {
     }
 
     function checkBoard() {
-        
-        boardArray = board();
+
+        let boardArray = board();
 
         for (let condition of win_conditions) {
             const [pos1, pos2, pos3] = condition;
