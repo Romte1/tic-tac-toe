@@ -56,9 +56,12 @@ function gameController() {
     }
 
     function checkBoard() {
+        
+        boardArray = board();
+
         for (let condition of win_conditions) {
             const [pos1, pos2, pos3] = condition;
-            if (board()[pos1] === board()[pos2] && board()[pos2] === board()[pos3] && board()[pos1] !== '') {
+            if (boardArray[pos1] === boardArray[pos2] && boardArray[pos2] === boardArray[pos3] && boardArray[pos1] !== '') {
                 return console.log('WIN!'); // Win condition met
             }
         }
