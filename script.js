@@ -34,14 +34,15 @@ function gameController() {
       ];
 
     function turnCheck() {
+        if (actions == 0) {
+            return turn
+        }
         if (turn === player1) {
-            turn = player2;
+            return turn = player2;
 
         } else {
-            turn = player1;
-
+            return turn = player1;
         }
-        return turn
 
     }
 
@@ -55,6 +56,10 @@ function gameController() {
         return actions = 0;
     }
 
+    function resetTurn() {
+        turn = player1;
+    }
+
     function checkBoard() {
 
         let boardArray = board();
@@ -62,13 +67,22 @@ function gameController() {
         for (let condition of win_conditions) {
             const [pos1, pos2, pos3] = condition;
             if (boardArray[pos1] === boardArray[pos2] && boardArray[pos2] === boardArray[pos3] && boardArray[pos1] !== '') {
-                return console.log('WIN!'); // Win condition met
+                return true, condition; // Win condition met
             }
         }
         return false; // No win condition met
     }
+
+    function winnerName(letter) {
+        if (letter === player1) {
+            return 'Player 1'
+        } else {
+            return 'Player 2'
+        }
+
+    }
     
-    return {turnCheck, actionsCounter, resetActions, checkBoard};
+    return {turnCheck, actionsCounter, resetActions, checkBoard, resetTurn, winnerName};
 
 }
 
@@ -77,6 +91,7 @@ function display() {
     const game = gameController();
     const squares = Array.from(document.querySelectorAll('.square'));
     const modal = document.querySelector('.modal');
+    const modalResult = document.querySelector('.modalResult')
     const btnRestart = document.querySelector('.btnRestart');
     
 
@@ -84,22 +99,36 @@ function display() {
         modal.close();
         squares.forEach(square => {
             square.textContent = '';
+            square.style.background = 'rgb(202, 216, 138)';
         })
         game.resetActions();
+        game.resetTurn();
     })
 
     squares.forEach(square => {
         square.addEventListener ('click', () =>{
-        if (square.textContent !== '') {
+        if (square.textContent !== '' || game.checkBoard()) {
             return
         }
         square.textContent = game.turnCheck();
         let counter = game.actionsCounter();
 
-        console.log(board());
-        game.checkBoard();
+
+
+        if (game.checkBoard()) {
+            winnerSquare = game.checkBoard();
+
+            squares[winnerSquare[0]].style.background = 'rgb(84, 196, 84)';
+            squares[winnerSquare[1]].style.background = 'rgb(84, 196, 84)';
+            squares[winnerSquare[2]].style.background = 'rgb(84, 196, 84)';
+            
+            console.log(game.checkBoard()[0]);
+            modalResult.textContent = `${game.winnerName(square.textContent)} Wins!`;
+            modal.showModal();
+        }
 
         if (counter === 9) {
+            modalResult.textContent = "It's a draw!";
             modal.showModal();
         }
 

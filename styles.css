@@ -79,9 +79,12 @@ textarea:not([rows]) {
 body {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: start;
     align-items: center;
     user-select: none;
+    background: linear-gradient(to right, #2A0909, rgb(24, 21, 31));
+    color: rgb(198, 235, 241);
+    gap:128px;
 
     .header {
         font-size: min(4rem, 8vw);
@@ -91,6 +94,8 @@ body {
     .container {
         display: grid;
         grid-template-columns: repeat(3, 0fr);
+        
+        
 
 
         .square {
@@ -100,6 +105,9 @@ body {
             justify-content: center;
             align-items: center;
             font-size: 10rem;
+            background: rgb(202, 216, 138);
+            box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+            color:black;
             
             &.top {
                 border-bottom:var(--square-borders);
@@ -138,7 +146,4 @@ dialog {
         width: 250px;
     }
 
-    >div {
-        
-    }
 }
