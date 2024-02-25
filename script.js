@@ -3,9 +3,16 @@
 */
 
 function Gameboard() {
-    const board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const getBoard = () => board;
-    return getBoard();
+    let board = [];
+    const squares = document.querySelectorAll('.square');
+
+    function updateBoard() {
+        board = Array.from(squares).map(square => square.textContent)
+        return board
+        
+    };
+
+    return updateBoard;
 }
 
 
@@ -15,9 +22,18 @@ function gameController() {
     let player2 = 'o';
     let turn = player1;
     let actions = 0;
+    let win_conditions = [
+        [0, 1, 2], // top row
+        [3, 4, 5], // middle row
+        [6, 7, 8], // bottom row
+        [0, 3, 6], // left column
+        [1, 4, 7], // middle column
+        [2, 5, 8], // right column
+        [0, 4, 8], // diagonal
+        [2, 4, 6]  // diagonal
+      ];
 
     function turnCheck() {
-        
         if (turn === player1) {
             turn = player2;
 
@@ -38,16 +54,28 @@ function gameController() {
     function resetActions() {
         return actions = 0;
     }
+
+    function checkBoard() {
+        for (let condition of win_conditions) {
+            const [pos1, pos2, pos3] = condition;
+            if (board()[pos1] === board()[pos2] && board()[pos2] === board()[pos3] && board()[pos1] !== '') {
+                return console.log('WIN!'); // Win condition met
+            }
+        }
+        return false; // No win condition met
+    }
     
-    return {turnCheck, actionsCounter, resetActions};
+    return {turnCheck, actionsCounter, resetActions, checkBoard};
 
 }
 
 function display() {
+    const board = Gameboard();
     const game = gameController();
-    const squares = document.querySelectorAll('.square');
+    const squares = Array.from(document.querySelectorAll('.square'));
     const modal = document.querySelector('.modal');
     const btnRestart = document.querySelector('.btnRestart');
+    
 
     btnRestart.addEventListener('click', () => {
         modal.close();
@@ -64,7 +92,10 @@ function display() {
         }
         square.textContent = game.turnCheck();
         let counter = game.actionsCounter();
-        console.log(counter);
+
+        console.log(board());
+        game.checkBoard();
+
         if (counter === 9) {
             modal.showModal();
         }
