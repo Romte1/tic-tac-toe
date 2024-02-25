@@ -18,8 +18,8 @@ function Gameboard() {
 
 function gameController() {
     const board = Gameboard();
-    let player1 = 'x';
-    let player2 = 'o';
+    let player1 = 'X';
+    let player2 = 'O';
     let turn = player1;
     let actions = 0;
     let win_conditions = [
