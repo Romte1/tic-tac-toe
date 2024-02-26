@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap');
 /* Box sizing rules */
 *,
 *::before,
@@ -82,6 +83,7 @@ body {
     justify-content: start;
     align-items: center;
     user-select: none;
+    font-family: 'Montserrat', sans-serif;
     background: linear-gradient(to right, #2A0909, rgb(24, 21, 31));
     color: rgb(198, 235, 241);
     gap:128px;
@@ -124,6 +126,43 @@ body {
             &.right {
                 border-left:var(--square-borders);
             }
+        }
+    }
+
+    .main {
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap:8px;
+    }
+}
+
+.playerInfo {
+    display:grid;
+    grid-template-columns: auto auto auto;
+    gap:16px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: end;
+
+    >h2{
+        font-size: 24px;
+    }
+    >button {
+        padding:8px 16px;
+        border-radius: 8px;
+        background: rgb(139, 73, 194);
+        border: none;
+        color:rgb(0, 0, 0);
+        font-weight: bold;
+        cursor:pointer;
+
+        &:hover {
+            transition:0.3s;
+            background: rgb(72, 46, 94);
+            color:rgb(202, 199, 199);
+
         }
     }
 }
