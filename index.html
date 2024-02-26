@@ -13,9 +13,9 @@
     </div>
     <div class="main">
         <div class="playerInfo">
-            <h2>Player 1</h2>
+            <h2 class="nameP1">Player 1</h2>
             <button class="setPlayerNames">Set player names</button>
-            <h2>Player 2</h2>
+            <h2 class="nameP2">Player 2</h2>
 
         </div>
         <div class="container">
@@ -33,6 +33,19 @@
     <dialog class="modal">
         <div class="modalResult">It's a draw!</div>
         <button class="btnRestart">Restart</button>
+    </dialog>
+
+    <dialog class="modal2">
+        <div>Custom names</div>
+        <div class="players">
+            <label for="p1">Player 1:</label>
+            <input maxlength="9" type="text" id="p1" class="p1">
+        </div>
+        <div class="players">
+            <label for="p2">Player 2:</label>
+            <input maxlength="9" type="text" id="p2" class="p2">
+        </div>
+        <button class="btnDone">Done</button>
     </dialog>
     
 </body>

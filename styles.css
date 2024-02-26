@@ -140,7 +140,7 @@ body {
 
 .playerInfo {
     display:grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr auto 1fr;
     gap:16px;
     width: 100%;
     justify-content: space-between;
@@ -149,6 +149,11 @@ body {
     >h2{
         font-size: 24px;
     }
+
+    >:last-child{
+        justify-self: end;
+    }
+    
     >button {
         padding:8px 16px;
         border-radius: 8px;
@@ -167,14 +172,15 @@ body {
     }
 }
 
-dialog {
+dialog.modal {
     padding:32px;
-    gap:16px;
     font-size: 50px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    padding:32px;
+    background: #dacccc;
 
     &::backdrop {
         backdrop-filter: blur(4px);
@@ -183,6 +189,53 @@ dialog {
     >button {
         height: 100px;
         width: 250px;
+        border-radius: 8px;
+    }
+
+    >input {
+        margin-bottom:8px;
+        width: 300px;
+    }
+    
+
+}
+
+dialog.modal2 {
+    padding:32px;
+    font-size: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding:32px;
+    background: #dacccc;
+
+    &::backdrop {
+        backdrop-filter: blur(4px);
+    }
+    .players {
+        font-size:24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap:8px;
+        margin-bottom: 16px;
+
+        >input {
+            width: 300px;
+            border-radius: 8px;
+            outline: none;
+            padding-left: 4px;
+        }
+        >label {
+            width: 100px;
+        }
+    }
+    >button {
+        height: 100px;
+        width: 250px;
+        border-radius: 8px;
     }
 
 }

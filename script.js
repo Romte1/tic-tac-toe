@@ -91,8 +91,27 @@ function display() {
     const game = gameController();
     const squares = Array.from(document.querySelectorAll('.square'));
     const modal = document.querySelector('.modal');
+    const modal2 = document.querySelector('.modal2');
     const modalResult = document.querySelector('.modalResult')
     const btnRestart = document.querySelector('.btnRestart');
+    const btnSetPlayerNames = document.querySelector('.setPlayerNames');
+    const inputP1 = document.querySelector('.p1');
+    const inputP2 = document.querySelector('.p2');
+    const nameP1 = document.querySelector('.nameP1');
+    const nameP2 = document.querySelector('.nameP2');
+    const btnDone = document.querySelector('.btnDone');
+
+    btnDone.addEventListener('click', () =>{
+        inputP1.value !== '' ? nameP1.textContent = inputP1.value : nameP1.textContent = 'Player 1';
+        inputP2.value !== '' ? nameP2.textContent = inputP2.value : nameP2.textContent = 'Player 2';
+
+        modal2.close();
+
+    })
+
+    btnSetPlayerNames.addEventListener('click', () => {
+        modal2.showModal();
+    })
     
 
     btnRestart.addEventListener('click', () => {
