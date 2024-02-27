@@ -18,9 +18,16 @@ function Gameboard() {
 
 function gameController() {
     const board = Gameboard();
-    let player1 = 'X';
-    let player2 = 'O';
-    let turn = player1;
+    let player1 = {
+        name: 'Player 1',
+        symbol: 'X',
+    };
+    let player2 = {
+        name: 'Player 2',
+        symbol: 'O',
+    };
+
+    let turn = player1.symbol;
     let actions = 0;
     let win_conditions = [
         [0, 1, 2], // top row
@@ -37,11 +44,11 @@ function gameController() {
         if (actions == 0) {
             return turn
         }
-        if (turn === player1) {
-            return turn = player2;
+        if (turn === player1.symbol) {
+            return turn = player2.symbol;
 
         } else {
-            return turn = player1;
+            return turn = player1.symbol;
         }
 
     }
@@ -57,7 +64,7 @@ function gameController() {
     }
 
     function resetTurn() {
-        turn = player1;
+        turn = player1.symbol;
     }
 
     function checkBoard() {
@@ -73,16 +80,27 @@ function gameController() {
         return false; // No win condition met
     }
 
+    function customPlayerName(name1='Player 1', name2='Player 2') {
+        player1 = {
+            name: name1,
+            symbol: 'X',
+        };
+        player2 = {
+            name: name2,
+            symbol: 'O',
+        };
+    }
+
     function winnerName(letter) {
-        if (letter === player1) {
-            return 'Player 1'
+        if (letter === player1.symbol) {
+            return player1.name
         } else {
-            return 'Player 2'
+            return player2.name
         }
 
     }
     
-    return {turnCheck, actionsCounter, resetActions, checkBoard, resetTurn, winnerName};
+    return {turnCheck, actionsCounter, resetActions, checkBoard, resetTurn, winnerName, customPlayerName};
 
 }
 
@@ -104,6 +122,7 @@ function display() {
     btnDone.addEventListener('click', () =>{
         inputP1.value !== '' ? nameP1.textContent = inputP1.value : nameP1.textContent = 'Player 1';
         inputP2.value !== '' ? nameP2.textContent = inputP2.value : nameP2.textContent = 'Player 2';
+        game.customPlayerName(nameP1.textContent, nameP2.textContent);
 
         modal2.close();
 
@@ -141,7 +160,7 @@ function display() {
             squares[winnerSquare[1]].style.background = 'rgb(84, 196, 84)';
             squares[winnerSquare[2]].style.background = 'rgb(84, 196, 84)';
             
-            console.log(game.checkBoard()[0]);
+
             modalResult.textContent = `${game.winnerName(square.textContent)} Wins!`;
             modal.showModal();
         }
